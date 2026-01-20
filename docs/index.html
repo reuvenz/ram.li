@@ -1,87 +1,171 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html" />
-    <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Vollkorn:400i,600i" rel="stylesheet">
-	<title>Ram.Li</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ram.li is for sale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --ink:#0a1f44;
+      --ink2:#0a3d1a;
+      --shadow:0 0 6px rgba(255,255,255,.95);
+      --card:rgba(255,255,255,.70);
+      --cardBorder:rgba(255,255,255,.65);
+    }
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px 18px;
+      font-family: Arial, sans-serif;
+
+      background-image:url("images/soil-m.jpg");
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+    }
+
+    .wrap{ width:min(760px, 100%); text-align:center; }
+
+    .panel{
+      background:var(--card);
+      border:1px solid var(--cardBorder);
+      border-radius:18px;
+      padding:26px 22px;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      backdrop-filter: blur(4px);
+    }
+
+    h1,h2,h3{ font-family:"Vollkorn", serif; margin:0; color:var(--ink); text-shadow:var(--shadow); }
+    h1{ font-size: clamp(3.4rem, 7vw, 6.0rem); line-height:1.05; }
+    h2{ font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height:1.15; margin-top:10px; }
+    h3{ font-size: clamp(1.05rem, 2.4vw, 1.55rem); line-height:1.35; margin-top:14px; font-weight:600; }
+
+    p{ margin:14px 0 0; color:#102a14; font-size:1.1rem; line-height:1.45; }
+    .meta{ margin-top:16px; font-size:1.05rem; }
+    .meta strong{ color:#0f2f16; }
+
+    .cta{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+    }
+
+    a{ color: var(--ink2); font-weight:700; text-decoration:none; }
+
+    /* BUTTONS */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+
+      min-width: 210px;
+      padding:14px 18px;
+
+      border-radius:14px;
+      border:2px solid rgba(10,61,26,.35);
+      background: rgba(255,255,255,.92);
+
+      color: var(--ink2);
+      font-weight:800;
+      font-size: 1.08rem;
+
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+      transition: transform .08s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+
+    /* .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,1);
+      border-color: rgba(10,61,26,.55);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+    } */
+    .btn:hover{
+	  transform: translateY(-3px);
+	  background: rgba(240, 255, 245, 1);           /* light green tint */
+	  border-color: rgba(10, 61, 26, .95);          /* darker border */
+	  box-shadow: 0 16px 34px rgba(0,0,0,.35);      /* stronger shadow */
+	  filter: brightness(1.03);                     /* slight “pop” */
 	
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
-	
- <style type="text/css">
- html {
-  height: 100%;
-  display: table;
-  margin: auto;
-}
-
- body {
-    height: 100%;
-    display: table-cell;
-    vertical-align: middle;
-	color: #060;
-    font-family: Arial, sans-serif;
-	background-image: url("images/soil-m.jpg");
-    background-repeat:no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
-}
-h1 {	
-	font-size: 6.5rem;
-    line-height: 1.2;
-    /* text-shadow: 0 0 5px #7d0202; */
-	text-shadow: 0 0 5px #fff;
-    font-family: 'Vollkorn', serif;
-    font-weight: 600;
-    color: darkblue;
-}
-
-h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    font-family: 'Vollkorn', serif;
-	text-shadow: 0 0 5px #fff;
-	color: darkblue;
-}
-h3 {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.2;
-    font-family: 'Vollkorn', serif;
-	text-shadow: 0 0 5px #fff;
-	color: darkblue;
-}
-
-
-@media only screen and (max-width: 820px) {
-    h1 {
-    font-size: 5rem;   
-    }
-    h2 {
-    font-size: 3rem;   
-    }
-    h3 {
-    font-size: 1.5rem;   
-    }
-	body {
-		background-image: url("images/soil-s.jpg");
 	}
 
- }
- </style>
+    .btn:active{
+      transform: translateY(0px);
+      box-shadow: 0 6px 16px rgba(0,0,0,.18);
+    }
+
+    .btn.primary{
+      border-color: rgba(10,61,26,.75);
+      background: linear-gradient(180deg, rgba(10,61,26,.15), rgba(255,255,255,.98));
+    }
+
+    .small{ margin-top:14px; font-size:.98rem; color:#16361d; }
+    .small a{ text-decoration: underline; text-underline-offset: 3px; }
+
+    .privacy{
+      margin-top:14px;
+      font-size:.95rem;
+      color:rgba(255,255,255,.95);
+      text-shadow:0 0 8px rgba(0,0,0,.35);
+      text-align:center;
+      max-width: 760px;
+    }
+
+    @media (max-width:820px){
+      body{ background-image:url("images/soil-s.jpg"); background-attachment:scroll; }
+      .panel{ padding:22px 16px; }
+      p{ font-size:1.02rem; }
+      .btn{ min-width: 240px; width: 100%; }
+    }
+  </style>
 </head>
 
 <body>
-<div style="text-align: center;">
-	<h1>Ram.li</h1>
-	<h2 style="margin-bottom: 40px; text-decoration: underline; font-weight:700">This domain is for sale</h2>
-	<div style="max-width: 500px;">
-		<h3>All proceeds from this sale will go directly to support the peace-creating projects of the Global Country of World Peace.</h3>
-	</div>
-	</div>
+  <main class="wrap">
+    <section class="panel">
+      <h1>ram.li</h1>
+      <h2>This domain is for sale.</h2>
+
+      <h3>
+        All proceeds from this sale will go directly to support the peace-creating projects of the Global Projects for Peace,
+        a U.S. 501(c)(3) nonprofit organization.
+      </h3>
+
+      <p class="meta"><strong>Asking price:</strong> $50,000 USD (serious inquiries only)</p>
+      <p class="meta"><strong>Purchase and transfer:</strong> handled securely via Sedo escrow.</p>
+
+      <div class="cta">
+        <a class="btn primary" href="https://sedo.com/search/details/?domain=ram.li" target="_blank" rel="noopener">
+          Secure Purchase via Sedo Escrow
+        </a>
+
+        <a class="btn primary" href="https://www.globalprojectsforpeace.org/" target="_blank" rel="noopener">
+          Visit Global Projects for Peace
+        </a>
+      </div>
+
+      <p class="small"><strong>Inquiries:</strong> <a href="mailto:admin@ram.li">admin@ram.li</a></p>
+    </section>
+
+    <p class="privacy">
+      <strong>Privacy:</strong> This website does not use cookies or tracking and does not collect personal data.
+      If you email us, we will use your message only to respond to your inquiry.
+    </p>
+  </main>
 </body>
 </html>
