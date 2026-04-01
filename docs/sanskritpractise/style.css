@@ -7,9 +7,16 @@
     --border-gold: #FFD700;
 }
 
-@font-face {
+/* @font-face {
     font-family: 'Raja';
     src: url('../fonts/Raja.woff') format('woff');
+} */
+@font-face {
+    font-family: 'Raja';
+    src: url('fonts/Raja.woff') format('woff'),
+         url('/fonts/Raja.woff') format('woff'); /* Absolute path fallback */
+    font-weight: normal;
+    font-style: normal;
 }
 
 body { 
