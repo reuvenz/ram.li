@@ -7,10 +7,6 @@
     --border-gold: #FFD700;
 }
 
-/* @font-face {
-    font-family: 'Raja';
-    src: url('../fonts/Raja.woff') format('woff');
-} */
 @font-face {
     font-family: 'Raja';
     src: url('fonts/Raja.woff') format('woff'),
@@ -65,9 +61,10 @@ div#top-title {
     justify-content: center; /* Centers the narrow DIV vertically */
     cursor: pointer; 
     color: #40C4FF; 
+    /* color:#3bb2e7; */
     user-select: none;
     background: rgba(255, 255, 255, 0.1);
-    transition: background 0.3s;
+    /* transition: background 0.3s; */
 }
 
 #stop-btn { left: 0; border-right: 1px solid rgba(0,0,0,0.05); }
@@ -86,9 +83,13 @@ div#top-title {
     margin-bottom: 20px; 
 }
 
-.btn-side:hover { 
-    background: rgba(255, 255, 255, 0.4); 
-    color: var(--primary-blue);
+.btn-side:hover {
+    color:#3bb2e7;
+    background: radial-gradient(
+        circle at center, 
+        rgba(255, 255, 255, 0.45) 0%, 
+        rgba(255, 255, 255, 0) 75%
+    );
 }
 /* --- FOCUS AREA --- */
 #focus-area {
@@ -127,7 +128,6 @@ div#top-title {
     width: 100%;
     display: flex;
     justify-content: space-between; /* Pushes outer groups to the extreme left/right */
-    margin-bottom: 20px;
 }
 
 .letter-group {
@@ -169,12 +169,6 @@ div#top-title {
 
 /* --- INDEPENDENT ROW CONTROLS --- */
 
-/* Line 1 & 2 standard spacing */
-.alphabet-row:nth-child(1) .letter-box,
-.alphabet-row:nth-child(2) .letter-box {
-    /* margin: 0 2px; */
-}
-
 /* Line 3: Dental & Labial spacing control */
 .alphabet-row.dental-labial .letter-box {
     margin: 0 14px; /* Adjust this to change gap between letters in Row 3 */
@@ -206,10 +200,10 @@ div#top-title {
     top: -15px;         /* Floats above the Sanskrit letter */
     left: 50%;
     transform: translateX(-50%);
-    /* background-color: var(--primary-blue); */
     color: var(--primary-blue);
     font-family: 'Georgia', serif;
     font-size: 16px;
+    font-size: 20px;
     padding: 2px 8px;
     border-radius: 4px;
     white-space: nowrap;
@@ -236,7 +230,7 @@ div#top-title {
     width: 100%;
     max-width: 820px;              /* Matches your alphabet grid width */
     margin: 0 auto;                /* Centers the containers */
-    padding: 10px 0;               /* consistent vertical spacing */
+    /* padding: 10px 0;  */              /* consistent vertical spacing */
 }
 
 .focus-column {
@@ -265,24 +259,6 @@ div#top-title {
     transition: all 0.2s;
     font-size: 12px;
 }
-
-.toggle-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
-}
-
-/* .toggle-btn {
-    width: 60px; 
-    padding: 5px 0;
-    border: 2px solid var(--primary-blue);
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 12px;
-} */
 
 .toggle-btn {
     width: 60px;
@@ -320,15 +296,9 @@ div#top-title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
+    margin-top: -10px;
 }
-/* .toggle-label {
-    margin-top: 5px;
-    font-size: 10px;
-    font-weight: bold;
-    color: var(--primary-blue);
-    letter-spacing: 0.5px;
-} */
+
 .toggle-label {
     margin-top: 8px;
     font-size: 11px;
@@ -362,9 +332,7 @@ div#top-title {
     align-items: center;
     width: 100%;
     max-width: 820px;
-    margin: 20px auto;
 }
-
 
 .control-group {
     display: flex;
@@ -403,43 +371,12 @@ div#top-title {
     text-transform: uppercase;
 }
 
-/* --- CUSTOM BORDER INJECTIONS --- */
-
-/* 1) Add top border to the second .alphabet-row (Guttural, Palatal, Cerebral) */
-#alphabet-container .alphabet-row:nth-child(2) {
-    /* border-top: 1px solid rgba(0, 68, 204, 0.2); */
-    border-top: 5px solid var(--interface-bg); 
-    padding-top: 15px; /* Adds space between the new border and the letters */
-}
-
-/* 2) Add bottom border to div class alphabet-row dental-labial */
-.alphabet-row.dental-labial {
-    /* border-bottom: 1px solid rgba(0, 68, 204, 0.2); */
-    border-bottom: 5px solid var(--interface-bg);
-    padding-bottom: 15px; /* Adds space between the letters and the new border */
-}
-
 /* --- SPARSHA LABEL ALIGNMENT --- */
 
 .alphabet-row.dental-labial {
     display: flex;
     justify-content: space-between;
     align-items: stretch; /* Allows #sparsha to fill the row height */
-}
-
-#sparsha {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Pushes text to the bottom */
-    padding-bottom: 2px;       /* Matches the margin-top of .group-label */
-    
-    /* Styling to match .group-label */
-    font-size: 15px;
-    font-style: italic;
-    color: var(--primary-blue);
-    font-weight: bold;         /* Optional: makes it stand out as a section label */
-    text-align: center;
-    min-width: 80px;           /* Ensures a consistent gap between groups */
 }
 
 /* --- FOOTER / COPYRIGHT STYLE --- */
@@ -454,4 +391,34 @@ div#top-title {
     opacity: 0.7;
     border-top: 1px solid rgba(0, 0, 204, 0.1);
     line-height: 1.5;
+}
+
+/* --- UPDATED SPARSHA LABEL --- */
+
+#alphabet-sparsha {
+    border: 2px dashed #a4cef8;
+    margin-top: 10px;
+    padding-bottom: 10px; /* Space for the label at the bottom */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers everything inside the dashed box */
+}
+
+.alphabet-row.dental-labial {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Ensures dental/labial still hit the edges */
+    padding-bottom: 10px; 
+}
+#sparsha {
+    width: 100%;
+    text-align: center;
+    margin-top: -5px;
+    font-size: 17px;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--primary-blue);
+    letter-spacing: 2px;
+    line-height: 0%;
 }
