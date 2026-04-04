@@ -1,4 +1,3 @@
-
 const letters = ["अ","आ","इ","ई","उ","ऊ","ऋ","ॠ","ऌ","ए","ऐ","ओ","औ","अं","अः","क","ख","ग","घ","ङ","च","छ","ज","झ","ञ","ट","ठ","ड","ढ","ण","त","थ","द","ध","न","प","फ","ब","भ","म","य","र","ल","व","श","ष","स","ह"];
 const romanMap = ["a","ā","i","ī","u","ū","ṛ","ṝ","ḷ","e","ai","o","au","aṃ","aḥ","ka","kha","ga","gha","ṅa","ca","cha","ja","jha","ña","ṭa","ṭha","ḍa","ḍha","ṇa","ta","tha","da","dha","na","pa","pha","ba","bha","ma","ya","ra","la","va","śa","ṣa","sa","ha"];
 const artPoints = [1,1,2,2,5,5,3,3,4,6,6,7,7,8,9,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5,2,3,4,5,2,3,4,1];
@@ -107,9 +106,10 @@ function togglePlay() {
         letterRepsLeft = parseInt(document.getElementById('letterReps').value) || 1;
         
         // Handle "Play All" logic for default state
-        if (startSelectionIdx === 0 && endSelectionIdx === 0 && currentIdx === 0) {
-            endSelectionIdx = letters.length - 1;
-        }
+        if (startSelectionIdx === null) {
+		    startSelectionIdx = 0;
+		    endSelectionIdx = letters.length - 1;
+		}
 
         // Only set selectRepsLeft if we aren't already mid-loop
         if (selectRepsLeft <= 1) {
@@ -152,42 +152,6 @@ function triggerLetter(shouldPlay = true) {
     }
 
     refreshGrid();
-
-  
-
-	/*const onLetterFinished = () => {
-	    if (!isPlaying) return;
-
-	    // 1. Handle N (Letter Repetition)
-	    if (letterRepsLeft > 1) {
-	        letterRepsLeft--;
-	        setTimeout(() => triggerLetter(true), 300);
-	    } else {
-	        // Reset N for the next letter
-	        letterRepsLeft = parseInt(document.getElementById('letterReps').value) || 1;
-
-	        // 2. Advance to next letter OR handle M (Selection Repetition)
-	        if (currentIdx < high) {
-	            const gap = parseInt(document.getElementById('gapRange').value);
-	            setTimeout(() => { 
-	                currentIdx++; 
-	                triggerLetter(true); 
-	            }, gap);
-	        } else {
-	            // Reached the end of the selection range
-	            if (selectRepsLeft > 1) {
-	                selectRepsLeft--; // Decrement the loop counter
-	                currentIdx = low; // Jump back to start of selection
-	                const gap = parseInt(document.getElementById('gapRange').value);
-	                setTimeout(() => triggerLetter(true), gap);
-	            } else {
-	                // All repetitions (M) finished
-	                pausePlayback();
-	                selectRepsLeft = 1; // Reset counter for next time PLAY is pressed
-	            }
-	        }
-	    }
-	};*/
 	
 	const onLetterFinished = () => {
 	    if (!isPlaying) return;
