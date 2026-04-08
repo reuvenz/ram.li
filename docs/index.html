@@ -1,187 +1,328 @@
-<!DOCTYPE html>
-<html lang="sa">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanskrit Alphabet Learning</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ram.li — Domain for Sale ($1,000,000)</title>
+  <meta name="description" content="ram.li is offered for sale for $1,000,000. Owned by Global Projects for Peace (501(c)(3)). Proceeds support peace-building projects worldwide." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1b33;
+      --text:#e9eefc;
+      --muted:#b7c4e6;
+      --accent:#7aa2ff;
+      --accent2:#7affc5;
+      --border:rgba(255,255,255,.12);
+      --shadow: 0 12px 36px rgba(0,0,0,.35);
+      --radius:18px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(122,162,255,.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 30%, rgba(122,255,197,.12), transparent 55%),
+        linear-gradient(180deg, #060a14 0%, var(--bg) 100%);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 0 22px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(122,162,255,.95), rgba(122,255,197,.85));
+      box-shadow: var(--shadow);
+    }
+    .brand span{font-weight:700; letter-spacing:.2px}
+    .pill{
+      border:1px solid var(--border);
+      padding:8px 12px; border-radius:999px;
+      color:var(--muted);
+      font-size:14px;
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.3fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+    }
+    .card{
+      background: rgba(15,27,51,.75);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-main{padding:26px 24px}
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height:1.15;
+      letter-spacing:-.5px;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: clamp(16px, 2.1vw, 18px);
+    }
+    .price{
+      display:inline-flex;
+      align-items:baseline;
+      gap:10px;
+      padding:10px 14px;
+      border-radius: 14px;
+      background: rgba(122,162,255,.12);
+      border:1px solid rgba(122,162,255,.35);
+      margin: 6px 0 18px;
+    }
+    .price strong{
+      font-size: 30px;
+      letter-spacing: .4px;
+    }
+    .price small{
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 14px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      font-weight: 650;
+      background: rgba(255,255,255,.06);
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(122,162,255,.95), rgba(122,255,197,.85));
+      color:#06101d;
+      border-color: transparent;
+    }
+    .btn.primary:hover{filter: brightness(1.02)}
+    .note{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .hero-side{
+      display:flex;
+      flex-direction:column;
+    }
+    .hero-side .top{
+      padding:18px 18px 0;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      padding: 12px 18px 18px;
+    }
+    .img{
+      position:relative;
+      overflow:hidden;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      aspect-ratio: 4/3;
+    }
+    .img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+    }
+    .caption{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      padding: 0 18px 18px;
+    }
+
+    .section{
+      margin-top: 18px;
+      padding: 22px 24px;
+    }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -.2px;
+    }
+    .section p{
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+    .bullets{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    footer{
+      margin-top: 18px;
+      padding: 18px 2px 0;
+      color: rgba(183,196,230,.8);
+      font-size: 13px;
+    }
+    .fine{
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 14px;
+      max-width: var(--max);
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+  </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/" aria-label="ram.li">
+        <div class="logo" aria-hidden="true"></div>
+        <span>ram.li</span>
+      </a>
+      <div class="pill">Owned by Global Projects for Peace (501(c)(3))</div>
+    </header>
 
-<div id="main-container">
-    <div id="top-title">Sanskrit Alphabet</div>
+    <main class="hero">
+      <section class="card hero-main">
+        <h1>ram.li is for sale</h1>
+        <p class="sub">
+          A short, memorable, meaningful domain offered by
+          <strong>Global Projects for Peace</strong>.
+        </p>
 
-<div id="stop-btn" class="btn-side" onclick="stopPlayback()">
-    <div class="label-strip">STOP</div>
-</div>
-
-<div id="play-pause-btn" class="btn-side" onclick="togglePlay()">
-    <div id="play-label" class="label-strip">PLAY</div>
-    <div id="pause-label" class="label-strip" style="display:none;">PAUSE</div>
-</div>
-
- <div id="focus-area">
-    <div class="focus-column">
-        <div id="big-roman">a</div>
-        <div class="toggle-container">
-            <button id="toggle-roman" class="toggle-btn on" onclick="toggleSetting('roman')">OFF</button>
-            <span class="toggle-label">ROMAN</span>
-        </div>
-    </div>
-
-    <div class="focus-column">
-        <div id="big-letter">अ</div>
-        <div class="toggle-container">
-            <button id="toggle-sound" class="toggle-btn on" onclick="toggleSetting('sound')">OFF</button>
-            <span class="toggle-label">SOUND</span>
-        </div>
-    </div>
-
-    <div class="focus-column">
-        <div id="articulation-focus">
-            <img id="articulation-img" src="" alt="Articulation Point">
-            <p id="articulation-text">Guttural</p>
-        </div>
-        <div class="toggle-container">
-            <button id="toggle-art" class="toggle-btn on" onclick="toggleSetting('art')">OFF</button>
-            <span class="toggle-label">ARTICULATION</span>
-        </div>
-    </div>
-</div>
-
-<div class="controls">
-   <div class="control-row">
-    <div class="control-group">
-        <select id="gapRange">
-            <option value="0" selected>0</option>
-         <!--   <option value="500">0.5</option>  --> 
-            <option value="1000">1</option>
-            <option value="2000">2</option>
-            <option value="3000">3</option>
-            <option value="4000">4</option>
-        </select>
-        <span class="control-label">Delay (sec)</span>
-    </div>
-
-    <div class="control-group">
-        <select id="letterReps">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <span class="control-label">Letter Repetition</span>
-    </div>
-
-    <div class="control-group">
-        <select id="selectReps">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <span class="control-label">Selection Repetition</span>
-    </div>
-</div>
-</div>
-
-    <div id="alphabet-container">
-        <div class="alphabet-row">
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="0">अ</div><div class="letter-box" data-index="1">आ</div>
-                    <div class="letter-box" data-index="2">इ</div><div class="letter-box" data-index="3">ई</div>
-                    <div class="letter-box" data-index="4">उ</div><div class="letter-box" data-index="5">ऊ</div>
-                    <div class="letter-box" data-index="6">ऋ</div><div class="letter-box" data-index="7">ॠ</div>
-                    <div class="letter-box" data-index="8">ऌ</div><div class="letter-box" data-index="9">ए</div>
-                    <div class="letter-box" data-index="10">ऐ</div><div class="letter-box" data-index="11">ओ</div>
-                    <div class="letter-box" data-index="12">औ</div>
-                </div>
-                <div class="group-label">svāra</div>
-            </div>
-            <div class="letter-group">
-                <div class="letter-box" data-index="13">अं</div>
-                <div class="group-label">anusvāra</div>
-            </div>
-            <div class="letter-group">
-                <div class="letter-box" data-index="14">अः</div>
-                <div class="group-label">visarga</div>
-            </div>
-        </div>
-	<div id="alphabet-sparsha">
-        <div class="alphabet-row">
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="15">क</div><div class="letter-box" data-index="16">ख</div>
-                    <div class="letter-box" data-index="17">ग</div><div class="letter-box" data-index="18">घ</div>
-                    <div class="letter-box" data-index="19">ङ</div>
-                </div>
-                <div class="group-label">guttural (kaṇṭhya)</div>
-            </div>
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="20">च</div><div class="letter-box" data-index="21">छ</div>
-                    <div class="letter-box" data-index="22">ज</div><div class="letter-box" data-index="23">झ</div>
-                    <div class="letter-box" data-index="24">ञ</div>
-                </div>
-                <div class="group-label">palatal (tālavya)</div>
-            </div>
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="25">ट</div><div class="letter-box" data-index="26">ठ</div>
-                    <div class="letter-box" data-index="27">ड</div><div class="letter-box" data-index="28">ढ</div>
-                    <div class="letter-box" data-index="29">ण</div>
-                </div>
-                <div class="group-label">cerebral (mūrdhanya)</div>
-            </div>
+        <div class="price" aria-label="Price">
+          <small>Asking price</small>
+          <strong>$1,000,000</strong>
         </div>
 
-        <div class="alphabet-row dental-labial">
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="30">त</div><div class="letter-box" data-index="31">थ</div>
-                    <div class="letter-box" data-index="32">द</div><div class="letter-box" data-index="33">ध</div>
-                    <div class="letter-box" data-index="34">न</div>
-                </div>
-                <div class="group-label">dental (dantya)</div>
-            </div>
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="35">प</div><div class="letter-box" data-index="36">फ</div>
-                    <div class="letter-box" data-index="37">ब</div><div class="letter-box" data-index="38">भ</div>
-                    <div class="letter-box" data-index="39">म</div>
-                </div>
-                <div class="group-label">labial (oṣṭhya)</div>
-            </div>
+        <p class="sub" style="margin-bottom:0">
+          We are exploring the sale of this domain to support peace-building initiatives and
+          Consciousness-based projects around the world.
+        </p>
+
+        <div class="actions">
+          <!-- Replace the # with your preferred “make offer” link (Sedo/Afternic/etc.). -->
+          <a class="btn primary" href="#" rel="nofollow">Make an offer</a>
+
+          <a class="btn" href="https://www.globalprojectsforpeace.org/" target="_blank" rel="noopener">
+            Visit Global Projects for Peace
+          </a>
+
+          <a class="btn" href="mailto:donations@gp4p.org?subject=Inquiry%20about%20ram.li%20domain%20purchase">
+            Contact: donations@gp4p.org
+          </a>
         </div>
-        <div id="sparsha">sparsha</div>
-	</div>
-        <div class="alphabet-row last-row">
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="40">य</div><div class="letter-box" data-index="41">र</div>
-                    <div class="letter-box" data-index="42">ल</div><div class="letter-box" data-index="43">व</div>
-                </div>
-                <div class="group-label">antahstha</div>
-            </div>
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="44">श</div><div class="letter-box" data-index="45">ष</div>
-                    <div class="letter-box" data-index="46">स</div><div class="letter-box" data-index="47">ह</div>
-                </div>
-                <div class="group-label">ūshman</div>
-            </div>
+
+        <div class="note">
+          Prefer a direct conversation? Email us with your name, company, and intended use.
         </div>
-    </div>
-    <footer id="app-footer">
-        &copy; 2026 Maharishi International University. All rights reserved.<br> 
-        Reproduction or distribution of any part of this page is strictly prohibited.<br>
-        Visit: <a href="https://www.miu.edu" target="_blank" rel="noopener noreferrer">www.miu.edu</a>
+      </section>
+
+      <aside class="card hero-side">
+        <div class="top">
+          <div class="pill" style="display:inline-flex; gap:8px; align-items:center;">
+            <span aria-hidden="true">❤</span>
+            <span>Why this matters</span>
+          </div>
+          <p class="caption" style="padding:12px 0 0; margin:0">
+            Our work supports projects that strengthen communities, education, resilience,
+            and peace in many countries.
+          </p>
+        </div>
+
+        <div class="grid" aria-label="Photo highlights">
+          <div class="img">
+            <img src="https://www.globalprojectsforpeace.org/media/com_sppagebuilder/placeholder/staff-crop-wendy-constance-graham-moira.jpg"
+                 alt="Global Projects for Peace team" loading="lazy" />
+          </div>
+          <div class="img">
+            <img src="https://www.globalprojectsforpeace.org/images/jdonation/TM-south-korea.jpg"
+                 alt="Project community photo (South Korea TM group)" loading="lazy" />
+          </div>
+          <div class="img">
+            <img src="https://www.globalprojectsforpeace.org/media/com_sppagebuilder/placeholder/president-steve-2.jpeg"
+                 alt="Global Projects for Peace leadership" loading="lazy" />
+          </div>
+          <div class="img">
+            <img src="https://www.globalprojectsforpeace.org/media/com_sppagebuilder/placeholder/secretary-mac2.jpg"
+                 alt="Global Projects for Peace leadership" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="caption">
+          Photos are linked from the official Global Projects for Peace website.
+        </div>
+      </aside>
+    </main>
+
+    <section class="card section">
+      <h2>About Global Projects for Peace</h2>
+      <p>
+        Global Projects for Peace is a U.S. tax-exempt nonprofit organization (501(c)(3)) that supports
+        peace-building and development projects internationally.
+      </p>
+      <ul class="bullets">
+        <li>Support for projects in multiple countries</li>
+        <li>Focus on sustainable, community-based impact</li>
+        <li>Transparent, mission-aligned stewardship</li>
+      </ul>
+      <div class="actions" style="margin-top:14px">
+        <a class="btn" href="https://www.globalprojectsforpeace.org/our-projects" target="_blank" rel="noopener">
+          See projects
+        </a>
+        <a class="btn" href="https://www.globalprojectsforpeace.org/contact-us" target="_blank" rel="noopener">
+          Contact page
+        </a>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Domain details</h2>
+      <ul class="bullets">
+        <li><span class="mono">ram.li</span> — short, brandable, memorable</li>
+        <li>Asking price: <strong>$10,000</strong></li>
+        <li>Serious inquiries only</li>
+      </ul>
+      <p class="note" style="margin:12px 0 0">
+        To inquire, email <a href="mailto:donations@gp4p.org?subject=ram.li%20purchase%20inquiry">donations@gp4p.org</a>.
+      </p>
+    </section>
+
+    <footer>
+      <div class="fine">
+        © <span id="y"></span> Global Projects for Peace • This page is a domain sale notice for <span class="mono">ram.li</span>.
+      </div>
     </footer>
-</div>
+  </div>
 
-<script src="logic.js"></script>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
