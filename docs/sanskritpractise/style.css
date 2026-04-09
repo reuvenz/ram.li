@@ -1,329 +1,233 @@
-/* --- GLOBAL VARIABLES & RESET --- */
+/* ============================================================
+   SANSKRIT ALPHABET LEARNING — RESPONSIVE STYLESHEET v3
+   Breakpoints: 800 | 560 | 420 | 320
+   ============================================================ */
+
+/* --- CSS CUSTOM PROPERTIES --- */
 :root {
-    --colorA: #FCC225;          /* Active Letter Highlight (Orange) */
-    --colorB: #C4FF00;          /* Drag Selection Highlight (Green) */
-    --primary-blue: #0000CC;    /* Main Text Color */
-    --interface-bg: #D9E9F9;    /* Light Blue Background */
+    --colorA: #FCC225;
+    --colorB: #C4FF00;
+    --primary-blue: #0000CC;
+    --interface-bg: #D9E9F9;
     --border-gold: #FFD700;
+
+    --pillar: 60px;
+
+    /* Letter grid tokens — calc ensures 15 boxes fit the svāra row.
+       usable = 100vw - 2×60px pillars - 20px (padding+border) = 100vw - 140px
+       At 1000px: (860)/15 = 57px → capped at 48px, so plenty of spacing. */
+    --lbox:  clamp(26px, calc((100vw - 156px) / 15), 48px);
+    --lfont: clamp(22px, calc((100vw - 156px) / 16), 50px);
+
+    /* Focus area tokens */
+    --big-letter-size: clamp(100px, 22vw, 280px);
+    --big-roman-size:  clamp(36px,   7vw,  80px);
+    --title-size:      clamp(20px,   4vw,  45px);
 }
+
+/* --- RESET / BASE --- */
+*, *::before, *::after { box-sizing: border-box; }
 
 @font-face {
     font-family: 'Raja';
     src: url('fonts/Raja.woff') format('woff'),
-         url('/fonts/Raja.woff') format('woff'); /* Absolute path fallback */
+         url('/fonts/Raja.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
-body { 
+body {
     font-family: 'Georgia', 'Times New Roman', serif;
-    background-color: #f0f8ff; 
+    background-color: #f0f8ff;
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
 }
 
-/* --- MAIN CONTAINER --- */
-#main-container { 
+/* ============================================================
+   MAIN CONTAINER — no padding (keeps JS click coords intact)
+   ============================================================ */
+#main-container {
     width: 100%;
     max-width: 1000px;
-    background: var(--interface-bg); 
-    border: 5px solid var(--border-gold); 
-    position: relative; 
+    background: var(--interface-bg);
+    border: 5px solid var(--border-gold);
+    position: relative;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* --- SIDE NAVIGATION BUTTONS --- */
-div#top-title {
-	text-align: center;
-    color: var(--primary-blue);
-    font-size: 45px;
-    font-weight: bold;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    /* top: 3%;*/
-}
-
-
-/* --- SIDE NAVIGATION BUTTONS (PILLAR STYLE) --- */
-/* --- SIDE NAVIGATION PILLARS --- */
-.btn-side { 
-    position: absolute; 
-    top: 0; 
-    height: 100%; 
-    width: 60px; 
-    display: flex; 
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center; /* Centers the narrow DIV vertically */
-    cursor: pointer; 
-    color: #40C4FF; 
-    /* color:#3bb2e7; */
-    user-select: none;
-    background: rgba(255, 255, 255, 0.1);
-    /* transition: background 0.3s; */
-}
-
-#stop-btn { left: 0; border-right: 1px solid rgba(0,0,0,0.05); }
-#play-pause-btn { right: 0; border-left: 1px solid rgba(0,0,0,0.05); }
-
-/* --- THE NARROW DIV LOGIC --- */
-.label-strip {
-    width: 1ch; /* Forces the box to be only one character wide */
-    word-wrap: break-word; /* Ensures letters break to new lines */
+/* ============================================================
+   TITLE
+   ============================================================ */
+#top-title {
     text-align: center;
-    font-size: 32px;
+    color: var(--primary-blue);
+    font-size: var(--title-size);
     font-weight: bold;
-    /* CONTROL VERTICAL SPACE HERE */
-    line-height: 2.2; 
-    /* CONTROL VERTICAL POSITION HERE */
-    margin-bottom: 20px; 
+    padding: 10px var(--pillar) 4px;
+    line-height: 1.2;
+}
+
+/* ============================================================
+   SIDE PILLARS  (JS-safe: absolute overlay)
+   ============================================================ */
+.btn-side {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: var(--pillar);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #40C4FF;
+    user-select: none;
+    background: rgba(255,255,255,0.1);
+    z-index: 10;
+}
+
+#stop-btn       { left: 0;  border-right: 1px solid rgba(0,0,0,0.05); }
+#play-pause-btn { right: 0; border-left:  1px solid rgba(0,0,0,0.05); }
+
+.label-strip {
+    width: 1ch;
+    word-wrap: break-word;
+    text-align: center;
+    font-size: clamp(14px, 2.8vw, 32px);
+    font-weight: bold;
+    line-height: 2.2;
+    margin-bottom: 20px;
 }
 
 .btn-side:hover {
-    color:#3bb2e7;
-    background: radial-gradient(
-        circle at center, 
-        rgba(255, 255, 255, 0.45) 0%, 
-        rgba(255, 255, 255, 0) 75%
+    color: #3bb2e7;
+    background: radial-gradient(circle at center,
+        rgba(255,255,255,0.45) 0%,
+        rgba(255,255,255,0) 75%
     );
 }
-/* --- FOCUS AREA --- */
-#focus-area {
-    width: 100%;
-    max-width: 820px;
-    margin: 10px auto;
-    padding: 15px 0;
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    align-items: flex-end;
-    overflow: hidden;
+
+/* ============================================================
+   INNER CONTENT INSET
+   margin-left/right keeps content clear of the absolute pillars
+   ============================================================ */
+#focus-area,
+.controls,
+#alphabet-container,
+#app-footer {
+    margin-left:  var(--pillar);
+    margin-right: var(--pillar);
 }
 
-#big-roman { font-size: 80px; font-weight: bold; color: var(--primary-blue); /* line-height: 0.9; */ text-align: center;margin-bottom: 10px; }
-#big-letter { font-family: 'Raja'; font-size: 280px; color: var(--primary-blue); line-height: 1; text-align: center;margin-bottom: 10px; }
-#articulation-focus { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
-#articulation-img { height: 70px; width: auto; object-fit: contain; }
-#articulation-text { font-size: 18px; font-weight: bold; color: var(--primary-blue); margin-top: 5px; text-transform: capitalize; }
-
-/* --- CONTROLS SECTION --- */
-.controls { display: flex; justify-content: center; gap: 40px; /* padding: 15px 0; */ color: var(--primary-blue); font-weight: bold; }
-
-/* --- ALPHABET GRID CONTAINER --- */
-#alphabet-container {
-    width: 100%;
-    max-width: 820px;
-    margin: 10px auto;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 5px 10px;
-    /* border-radius: 15px; */
-    box-sizing: border-box;
-}
-
-/* --- ROW LOGIC: THE SNAP --- */
-.alphabet-row {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* Pushes outer groups to the extreme left/right */
-}
-
-.letter-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.letters-wrap {
-    display: flex;
-    justify-content: center;
-}
-
-.group-label {
-    font-size: 15px;
-    font-style: italic;
-    color: var(--primary-blue);
-    margin-top: 2px;
-    border-top: 1px solid rgba(0,0,204,0.1);
-    width: 100%;
-    text-align: center;
-}
-
-/* --- LETTER BOXES --- */
-.letter-box { 
-    font-family: 'Raja';
-    min-width: 48px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer; 
-    font-size: 50px; 
-    color: var(--primary-blue); 
-    user-select: none;
-    transition: background 0.1s;
-}
-.letter-box:hover { background-color: rgba(255, 255, 0, 0.5); }
-
-/* --- INDEPENDENT ROW CONTROLS --- */
-
-/* Line 3: Dental & Labial spacing control */
-.alphabet-row.dental-labial .letter-box {
-    margin: 0 14px; /* Adjust this to change gap between letters in Row 3 */
-}
-
-/* Line 4: Antahstha & Ushman spacing control */
-.alphabet-row.last-row .letter-box {
-    margin: 0 20px; /* Adjust this to change gap between letters in Row 4 */
-}
-
-/* PIXEL PERFECT EDGES: 
-   This removes the margin from the very first and very last letter of every row 
-   so they hit the edge of the blue container exactly. */
-.alphabet-row .letter-group:first-child .letter-box:first-child { margin-left: 0; }
-.alphabet-row .letter-group:last-child .letter-box:last-child { margin-right: 0; }
-
-/* --- STATE CLASSES --- */
-.selected-range { background-color: var(--colorB); outline: 1px solid #7cb342; }
-.active { background-color: var(--colorA) !important; border-radius: 4px; }
-
-/* --- ROMAN HOVER POPUP --- */
-.letter-box {
-    position: relative; /* So the hint can anchor to the box */
-}
-
-.roman-hint {
-    display: none;       /* Hidden by default */
-    position: absolute;
-    top: -15px;         /* Floats above the Sanskrit letter */
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--primary-blue);
-    font-family: 'Georgia', serif;
-    font-size: 16px;
-    font-size: 20px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    z-index: 100;       /* Ensures it stays on top of other rows */
-    pointer-events: none; /* Prevents flickering */
-}
-
-/* Show the hint on hover */
-.letter-box:hover .roman-hint {
-    display: block;
-}
-/* --- controls --- */
+/* ============================================================
+   FOCUS AREA  — DESKTOP / TABLET (three columns side by side)
+   ============================================================ */
 #focus-area {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    padding: 20px 60px;
-}
-#focus-area, 
-.control-row {
-    display: flex;
-    justify-content: space-around; /* Spreads items evenly in both rows */
-    align-items: flex-end;         /* Keeps items bottom-aligned */
-    width: 100%;
-    max-width: 820px;              /* Matches your alphabet grid width */
-    margin: 0 auto;                /* Centers the containers */
-    /* padding: 10px 0;  */              /* consistent vertical spacing */
+    padding: 10px 0;
+    gap: 4px;
 }
 
 .focus-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 33%;
-}
-.focus-column,
-.control-group {
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-/* Custom Toggle Buttons */
-.toggle-btn {
-    margin-top: 15px;
-    padding: 5px 15px;
-    border: 2px solid var(--primary-blue);
-    border-radius: 20px;
-    background: white;
-    color: var(--primary-blue);
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 12px;
+    flex: 1;
+    min-width: 0;
 }
 
-.toggle-btn {
-    width: 60px;
-    padding: 6px 0;
-    font-size: 13px;
+#big-roman {
+    font-size: var(--big-roman-size);
     font-weight: bold;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    
-    /* 1) Darker than the light-blue interface background */
-    background-color: #0044CC; 
-    color: #FFFFFF;
-    
-    /* 2) Less border radius for a more square/rectangular look */
-    border: 1px solid #0033AA;
-    border-radius: 4px; 
-    
-    /* 3) Soft shadow for a tactile, "button" look */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    
+    color: var(--primary-blue);
     text-align: center;
-    user-select: none;
+    margin-bottom: 8px;
+    line-height: 1;
 }
-/* Subtle "press" effect when clicked */
-.toggle-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+#big-letter {
+    font-family: 'Raja';
+    font-size: var(--big-letter-size);
+    color: var(--primary-blue);
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 8px;
 }
-/* Hover effect to make it feel interactive */
-.toggle-btn:hover {
-    background-color: #0033BB;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+#articulation-focus {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 }
+
+#articulation-img {
+    height: clamp(36px, 7vw, 70px);
+    width: auto;
+    object-fit: contain;
+}
+
+#articulation-text {
+    font-size: clamp(11px, 1.8vw, 18px);
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-top: 5px;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+/* ============================================================
+   TOGGLE BUTTONS
+   ============================================================ */
 .toggle-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -10px;
+    margin-top: 6px;
 }
 
 .toggle-label {
-    margin-top: 8px;
-    font-size: 11px;
+    margin-top: 6px;
+    font-size: clamp(8px, 1.4vw, 11px);
     font-weight: bold;
     color: var(--primary-blue);
     letter-spacing: 0.5px;
 }
-.toggle-btn.on {
-    background: var(--primary-blue);
-    color: white;
-}
 
-.toggle-btn.off {
-     background: var(--primary-blue);
-    color: white;
-}
-
-.controls select {
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--primary-blue);
-    background: white;
-    color: var(--primary-blue);
+.toggle-btn {
+    width: clamp(40px, 7vw, 60px);
+    padding: 5px 0;
+    font-size: clamp(10px, 1.6vw, 13px);
     font-weight: bold;
     cursor: pointer;
+    background-color: #0044CC;
+    color: #FFFFFF;
+    border: 1px solid #0033AA;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    text-align: center;
+    user-select: none;
+    transition: all 0.15s ease;
+    margin-top: 10px;
+}
+
+.toggle-btn:active { transform: translateY(2px); box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.toggle-btn:hover  { background-color: #0033BB; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+.toggle-btn.on, .toggle-btn.off { background: var(--primary-blue); color: white; }
+
+/* ============================================================
+   CONTROLS ROW
+   ============================================================ */
+.controls {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0 8px;
 }
 
 .control-row {
@@ -331,7 +235,7 @@ div#top-title {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    max-width: 820px;
+    gap: 8px;
 }
 
 .control-group {
@@ -339,86 +243,385 @@ div#top-title {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    min-width: 0;
 }
 
 .control-group select {
-    font-size: 18px;
-    padding: 2px 2px;
-    min-width: 60px;
+    font-size: clamp(13px, 2vw, 18px);
+    padding: 2px 4px;
+    min-width: 46px;
     border: 1px solid #0044CC;
     border-radius: 4px;
     background-color: #FFFFFF;
     color: #0044CC;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.16);
     outline: none;
     transition: all 0.2s ease;
 }
 
-/* Hover effect for better interactivity */
-.control-group select:hover {
-    background-color: #f0f4ff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
+.control-group select:hover { background-color: #f0f4ff; }
 
-/* Ensuring labels remain bold and visible */
 .control-label {
-    margin-top: 10px;
-    font-size: 13px;
+    margin-top: 6px;
+    font-size: clamp(8px, 1.3vw, 13px);
     font-weight: bold;
-    color: #0000CC; /* Match var(--primary-blue) */
+    color: var(--primary-blue);
     text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
 }
 
-/* --- SPARSHA LABEL ALIGNMENT --- */
+/* ============================================================
+   ALPHABET CONTAINER
+   ============================================================ */
+#alphabet-container {
+    background: rgba(255,255,255,0.7);
+    padding: 5px 4px;
+}
 
-.alphabet-row.dental-labial {
+/* ============================================================
+   ROWS & GROUPS
+   ============================================================ */
+.alphabet-row {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: stretch; /* Allows #sparsha to fill the row height */
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 0;
 }
 
-/* --- FOOTER / COPYRIGHT STYLE --- */
-#app-footer {
-    width: 100%;
-    max-width: 820px; /* Matches your grid width */
-    margin: 20px auto 10px auto;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 14px;
+/* Svāra group (13 letters) must not crowd out anusvāra + visarga.
+   Cap it so the right two single-letter groups always have space.
+   13/15 = 86.7% of total letter budget → use ~82% to leave a visible gap. */
+#alphabet-container > .alphabet-row:first-child .letter-group:first-child {
+    max-width: calc(var(--lbox) * 13);
+}
+
+/* Ensure anusvāra and visarga groups each have at minimum one box width + label */
+#alphabet-container > .alphabet-row:first-child .letter-group:nth-child(2),
+#alphabet-container > .alphabet-row:first-child .letter-group:nth-child(3) {
+    min-width: calc(var(--lbox) + 4px);
+    flex-shrink: 0;
+}
+
+.letter-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 1;
+}
+
+/* KEY: nowrap keeps every row on one line. Size via --lbox/--lfont */
+.letters-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.group-label {
+    font-size: clamp(10px, 1.3vw, 15px);
+    font-style: italic;
     color: var(--primary-blue);
-    opacity: 0.7;
-    border-top: 1px solid rgba(0, 0, 204, 0.1);
-    line-height: 1.5;
+    margin-top: 2px;
+    border-top: 1px solid rgba(0,0,204,0.1);
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
 }
 
-/* --- UPDATED SPARSHA LABEL --- */
+/* ============================================================
+   LETTER BOXES
+   Fixed width/height from token. The token itself (calc-based)
+   guarantees 15 boxes fit the available container width.
+   ============================================================ */
+.letter-box {
+    font-family: 'Raja';
+    width:  var(--lbox);
+    height: var(--lbox);
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: var(--lfont);
+    color: var(--primary-blue);
+    user-select: none;
+    touch-action: none;
+    transition: background 0.1s;
+    position: relative;
+}
 
+.letter-box:hover { background-color: rgba(255,255,0,0.5); }
+
+/* Roman hint: CSS hover (desktop) + .show-hint class (mobile JS) */
+.roman-hint {
+    display: none;
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--primary-blue);
+    font-family: 'Georgia', serif;
+    font-size: clamp(10px, 1.6vw, 18px);
+    background: rgba(217, 233, 249, 0.95);
+    border: 1px solid rgba(0,0,204,0.2);
+    padding: 1px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    z-index: 200;
+    pointer-events: none;
+}
+.letter-box:hover .roman-hint { display: block; }
+.letter-box.show-hint .roman-hint { display: block; }
+
+/* Sparser rows get extra margin to spread out */
+.alphabet-row.dental-labial .letter-box { margin: 0 clamp(2px, 1.2vw, 14px); }
+.alphabet-row.last-row       .letter-box { margin: 0 clamp(4px, 1.8vw, 20px); }
+
+/* First/last letter touches container edge */
+.alphabet-row .letter-group:first-child .letter-box:first-child { margin-left: 0; }
+.alphabet-row .letter-group:last-child  .letter-box:last-child  { margin-right: 0; }
+
+/* ============================================================
+   SPARSHA SECTION
+   ============================================================ */
 #alphabet-sparsha {
     border: 2px dashed #a4cef8;
     margin-top: 10px;
-    padding-bottom: 10px; /* Space for the label at the bottom */
+    padding-bottom: 6px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers everything inside the dashed box */
+    align-items: center;
 }
 
 .alphabet-row.dental-labial {
     display: flex;
     justify-content: space-between;
-    width: 100%; /* Ensures dental/labial still hit the edges */
-    padding-bottom: 10px; 
+    width: 100%;
+    padding-bottom: 8px;
 }
+
 #sparsha {
     width: 100%;
     text-align: center;
-    margin-top: -5px;
-    font-size: 17px;
+    margin-top: 0;
+    font-size: clamp(11px, 1.8vw, 17px);
     font-family: 'Georgia', serif;
     font-style: italic;
     font-weight: bold;
     color: var(--primary-blue);
     letter-spacing: 2px;
-    line-height: 0%;
+    line-height: 1.4;
+}
+
+/* ============================================================
+   STATE CLASSES
+   ============================================================ */
+.selected-range { background-color: var(--colorB); outline: 1px solid #7cb342; }
+.active { background-color: var(--colorA) !important; border-radius: 4px; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#app-footer {
+    padding: 10px 0;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: clamp(10px, 1.6vw, 14px);
+    color: var(--primary-blue);
+    opacity: 0.7;
+    border-top: 1px solid rgba(0,0,204,0.1);
+    line-height: 1.6;
+}
+#app-footer a { color: var(--primary-blue); }
+
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* ── 800px: tablet ─────────────────────────────────────────── */
+@media (max-width: 800px) {
+    :root {
+        --pillar: 44px;
+        --big-letter-size: clamp(90px, 20vw, 200px);
+        --big-roman-size:  clamp(30px,  7vw,  60px);
+        /* usable width ≈ vw - 2×44px - 8px padding = vw - 96px
+           svāra row: 15 boxes must fit → lbox = (vw - 96) / 15
+           At 800px: (800-96)/15 = 46.9 → cap at 40px            */
+        --lbox:  clamp(20px, calc((100vw - 124px) / 15), 40px);
+        --lfont: clamp(16px, calc((100vw - 124px) / 16), 38px);
+    }
+    .label-strip { font-size: clamp(13px, 2.5vw, 26px); line-height: 2.1; margin-bottom: 12px; }
+}
+
+/* ── 560px: large phone ───────────────────────────────────── */
+@media (max-width: 560px) {
+    :root {
+        --pillar: 32px;
+        --big-letter-size: clamp(60px, 20vw, 130px);
+        --big-roman-size:  clamp(22px,  8vw,  44px);
+        /* usable = vw - 2×32px - 8px = vw - 72px
+           At 560px: (560-72)/15 = 32.5 → fine
+           At 420px: (420-72)/15 = 23.2 → still fine            */
+        --lbox:  clamp(16px, calc((100vw - 100px) / 15), 32px);
+        --lfont: clamp(13px, calc((100vw - 100px) / 16), 28px);
+    }
+    #top-title { padding: 8px var(--pillar) 4px; }
+    .label-strip { font-size: clamp(11px, 3vw, 20px); line-height: 2.0; margin-bottom: 8px; }
+    .group-label { white-space: normal; font-size: clamp(11px, 2vw, 14px); }
+    /* Extra gap between anusvāra and visarga single-letter groups */
+    #alphabet-container > .alphabet-row:first-child .letter-group:nth-child(3) {
+        margin-left: clamp(4px, 1vw, 10px);
+    }
+    .alphabet-row.dental-labial .letter-box { margin: 0 clamp(0px, 0.8vw, 6px); }
+    .alphabet-row.last-row       .letter-box { margin: 0 clamp(1px, 1.2vw, 10px); }
+    .control-label { white-space: normal; font-size: clamp(7px, 1.8vw, 11px); }
+}
+
+/* ── 420px: small phone — tighten letters + redesign focus area */
+@media (max-width: 420px) {
+    :root {
+        --pillar: 26px;
+        --big-letter-size: clamp(52px, 20vw, 90px);
+        --big-roman-size:  clamp(20px,  8vw, 36px);
+        /* usable = vw - 2×26px - 8px = vw - 60px
+           At 420px: (420-60)/15 = 24px  ✓
+           At 320px: (320-60)/15 = 17.3px ✓                      */
+        --lbox:  clamp(11px, calc((100vw - 90px) / 15), 24px);
+        --lfont: clamp( 9px, calc((100vw - 90px) / 16), 22px);
+    }
+
+    #top-title {
+        font-size: clamp(15px, 5.5vw, 22px);
+        padding: 8px var(--pillar) 4px;
+    }
+
+    .label-strip {
+        font-size: clamp(10px, 3.5vw, 17px);
+        line-height: 1.9;
+        margin-bottom: 6px;
+    }
+
+    /* ── Focus area: 3 equal columns, each self-contained ─────
+       Every .focus-column is a flex column:
+         [content: big-roman / big-letter / art-img+text]
+         [toggle-container]
+       No grid-row spanning needed — all three columns share
+       the same natural height automatically.                     */
+    #focus-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: stretch;      /* all columns same height */
+        padding: 6px 0 2px;
+        gap: 2px;
+    }
+
+    .focus-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;  /* content top, toggle bottom */
+        flex: 1;
+        min-width: 0;
+    }
+
+    /* Content area inside each column fills remaining space */
+    .focus-column > *:first-child {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #big-roman {
+        font-size: var(--big-roman-size);
+        margin-bottom: 0;
+        line-height: 1.1;
+    }
+
+    #big-letter {
+        font-size: var(--big-letter-size);
+        margin-bottom: 0;
+        line-height: 1.05;
+    }
+
+    #articulation-focus {
+        justify-content: center;
+    }
+
+    #articulation-img  { height: clamp(26px, 8vw, 42px); }
+    #articulation-text { font-size: clamp(9px, 2.5vw, 12px); margin-top: 2px; }
+
+    .toggle-btn {
+        width: clamp(32px, 9vw, 44px);
+        font-size: clamp(9px, 2.5vw, 12px);
+        margin-top: 4px;
+        padding: 3px 0;
+    }
+    .toggle-label { font-size: clamp(7px, 2vw, 10px); margin-top: 3px; }
+    .toggle-container { margin-top: 0; }
+
+    /* Controls */
+    .control-row { gap: 4px; }
+    .control-group select { font-size: 12px; min-width: 36px; padding: 2px; }
+    .control-label { font-size: clamp(6px, 2vw, 10px); white-space: normal; }
+
+    /* Group labels */
+    .group-label { white-space: normal; font-size: clamp(11px, 2.8vw, 13px); }
+
+    /* Truncate anusvāra/visarga labels that overlap at narrow widths */
+    #alphabet-container > .alphabet-row:first-child .letter-group:nth-child(2) .group-label,
+    #alphabet-container > .alphabet-row:first-child .letter-group:nth-child(3) .group-label {
+        overflow: hidden;
+        text-overflow: clip;
+        max-width: calc(var(--lbox) + 4px);
+        white-space: nowrap;
+    }
+    .alphabet-row.dental-labial .letter-box { margin: 0; }
+    .alphabet-row.last-row       .letter-box { margin: 0 clamp(0px, 1vw, 6px); }
+}
+
+/* ── 320px: minimum supported width ──────────────────────── */
+@media (max-width: 320px) {
+    :root {
+        --pillar: 20px;
+        --big-letter-size: clamp(44px, 18vw, 70px);
+        --big-roman-size:  clamp(16px,  7vw, 28px);
+        /* usable = vw - 2×20px - 8px = vw - 48px
+           At 320px: (320-48)/15 = 18.1px ✓                      */
+        --lbox:  clamp(10px, calc((100vw - 60px) / 15), 18px);
+        --lfont: clamp( 9px, calc((100vw - 60px) / 16), 16px);
+    }
+
+    #top-title { font-size: clamp(13px, 5vw, 18px); padding: 6px var(--pillar) 3px; }
+
+    .label-strip { font-size: clamp(9px, 3.5vw, 14px); line-height: 1.7; margin-bottom: 4px; }
+
+    .toggle-btn { width: clamp(26px, 9vw, 36px); font-size: 8px; padding: 2px 0; margin-top: 2px; }
+    .toggle-label { font-size: 6px; margin-top: 2px; }
+
+    #articulation-img  { height: clamp(20px, 7vw, 34px); }
+    #articulation-text { font-size: clamp(8px, 2.5vw, 11px); }
+
+    .control-group select { font-size: 10px; min-width: 28px; padding: 1px 2px; }
+    .control-label { font-size: 6px; }
+
+    .group-label { white-space: normal; font-size: clamp(9px, 3vw, 11px); }
+    #alphabet-container > .alphabet-row:first-child .letter-group:nth-child(2) .group-label,
+    #alphabet-container > .alphabet-row:first-child .letter-group:nth-child(3) .group-label {
+        overflow: hidden;
+        text-overflow: clip;
+        max-width: calc(var(--lbox) + 2px);
+        white-space: nowrap;
+    }
+    .alphabet-row.dental-labial .letter-box { margin: 0; }
+    .alphabet-row.last-row       .letter-box { margin: 0 clamp(0px, 0.8vw, 4px); }
 }
