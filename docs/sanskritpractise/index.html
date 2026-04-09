@@ -9,83 +9,83 @@
 <body>
 
 <div id="main-container">
+
     <div id="top-title">Sanskrit Alphabet</div>
 
-<div id="stop-btn" class="btn-side" onclick="stopPlayback()">
-    <div class="label-strip">STOP</div>
-</div>
+    <div id="stop-btn" class="btn-side" onclick="stopPlayback()">
+        <div class="label-strip">STOP</div>
+    </div>
 
-<div id="play-pause-btn" class="btn-side" onclick="togglePlay()">
-    <div id="play-label" class="label-strip">PLAY</div>
-    <div id="pause-label" class="label-strip" style="display:none;">PAUSE</div>
-</div>
+    <div id="play-pause-btn" class="btn-side" onclick="togglePlay()">
+        <div id="play-label" class="label-strip">PLAY</div>
+        <div id="pause-label" class="label-strip" style="display:none;">PAUSE</div>
+    </div>
 
- <div id="focus-area">
-    <div class="focus-column">
-        <div id="big-roman">a</div>
-        <div class="toggle-container">
-            <button id="toggle-roman" class="toggle-btn on" onclick="toggleSetting('roman')">OFF</button>
-            <span class="toggle-label">ROMAN</span>
+    <div id="focus-area">
+        <div class="focus-column">
+            <div id="big-roman">a</div>
+            <div class="toggle-container">
+                <button id="toggle-roman" class="toggle-btn on" onclick="toggleSetting('roman')">OFF</button>
+                <span class="toggle-label">ROMAN</span>
+            </div>
+        </div>
+
+        <div class="focus-column">
+            <div id="big-letter">अ</div>
+            <div class="toggle-container">
+                <button id="toggle-sound" class="toggle-btn on" onclick="toggleSetting('sound')">OFF</button>
+                <span class="toggle-label">SOUND</span>
+            </div>
+        </div>
+
+        <div class="focus-column">
+            <div id="articulation-focus">
+                <img id="articulation-img" src="" alt="Articulation Point">
+                <p id="articulation-text">Guttural</p>
+            </div>
+            <div class="toggle-container">
+                <button id="toggle-art" class="toggle-btn on" onclick="toggleSetting('art')">OFF</button>
+                <span class="toggle-label">ARTICULATION</span>
+            </div>
         </div>
     </div>
 
-    <div class="focus-column">
-        <div id="big-letter">अ</div>
-        <div class="toggle-container">
-            <button id="toggle-sound" class="toggle-btn on" onclick="toggleSetting('sound')">OFF</button>
-            <span class="toggle-label">SOUND</span>
+    <div class="controls">
+        <div class="control-row">
+            <div class="control-group">
+                <select id="gapRange">
+                    <option value="0" selected>0</option>
+                    <option value="1000">1</option>
+                    <option value="2000">2</option>
+                    <option value="3000">3</option>
+                    <option value="4000">4</option>
+                </select>
+                <span class="control-label">Delay (sec)</span>
+            </div>
+
+            <div class="control-group">
+                <select id="letterReps">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <span class="control-label">Letter Repetition</span>
+            </div>
+
+            <div class="control-group">
+                <select id="selectReps">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <span class="control-label">Selection Repetition</span>
+            </div>
         </div>
     </div>
-
-    <div class="focus-column">
-        <div id="articulation-focus">
-            <img id="articulation-img" src="" alt="Articulation Point">
-            <p id="articulation-text">Guttural</p>
-        </div>
-        <div class="toggle-container">
-            <button id="toggle-art" class="toggle-btn on" onclick="toggleSetting('art')">OFF</button>
-            <span class="toggle-label">ARTICULATION</span>
-        </div>
-    </div>
-</div>
-
-<div class="controls">
-   <div class="control-row">
-    <div class="control-group">
-        <select id="gapRange">
-            <option value="0" selected>0</option>
-         <!--   <option value="500">0.5</option>  --> 
-            <option value="1000">1</option>
-            <option value="2000">2</option>
-            <option value="3000">3</option>
-            <option value="4000">4</option>
-        </select>
-        <span class="control-label">Delay (sec)</span>
-    </div>
-
-    <div class="control-group">
-        <select id="letterReps">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <span class="control-label">Letter Repetition</span>
-    </div>
-
-    <div class="control-group">
-        <select id="selectReps">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <span class="control-label">Selection Repetition</span>
-    </div>
-</div>
-</div>
 
     <div id="alphabet-container">
         <div class="alphabet-row">
@@ -110,54 +110,56 @@
                 <div class="group-label">visarga</div>
             </div>
         </div>
-	<div id="alphabet-sparsha">
-        <div class="alphabet-row">
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="15">क</div><div class="letter-box" data-index="16">ख</div>
-                    <div class="letter-box" data-index="17">ग</div><div class="letter-box" data-index="18">घ</div>
-                    <div class="letter-box" data-index="19">ङ</div>
+
+        <div id="alphabet-sparsha">
+            <div class="alphabet-row">
+                <div class="letter-group">
+                    <div class="letters-wrap">
+                        <div class="letter-box" data-index="15">क</div><div class="letter-box" data-index="16">ख</div>
+                        <div class="letter-box" data-index="17">ग</div><div class="letter-box" data-index="18">घ</div>
+                        <div class="letter-box" data-index="19">ङ</div>
+                    </div>
+                    <div class="group-label">guttural (kaṇṭhya)</div>
                 </div>
-                <div class="group-label">guttural (kaṇṭhya)</div>
-            </div>
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="20">च</div><div class="letter-box" data-index="21">छ</div>
-                    <div class="letter-box" data-index="22">ज</div><div class="letter-box" data-index="23">झ</div>
-                    <div class="letter-box" data-index="24">ञ</div>
+                <div class="letter-group">
+                    <div class="letters-wrap">
+                        <div class="letter-box" data-index="20">च</div><div class="letter-box" data-index="21">छ</div>
+                        <div class="letter-box" data-index="22">ज</div><div class="letter-box" data-index="23">झ</div>
+                        <div class="letter-box" data-index="24">ञ</div>
+                    </div>
+                    <div class="group-label">palatal (tālavya)</div>
                 </div>
-                <div class="group-label">palatal (tālavya)</div>
-            </div>
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="25">ट</div><div class="letter-box" data-index="26">ठ</div>
-                    <div class="letter-box" data-index="27">ड</div><div class="letter-box" data-index="28">ढ</div>
-                    <div class="letter-box" data-index="29">ण</div>
+                <div class="letter-group">
+                    <div class="letters-wrap">
+                        <div class="letter-box" data-index="25">ट</div><div class="letter-box" data-index="26">ठ</div>
+                        <div class="letter-box" data-index="27">ड</div><div class="letter-box" data-index="28">ढ</div>
+                        <div class="letter-box" data-index="29">ण</div>
+                    </div>
+                    <div class="group-label">cerebral (mūrdhanya)</div>
                 </div>
-                <div class="group-label">cerebral (mūrdhanya)</div>
             </div>
+
+            <div class="alphabet-row dental-labial">
+                <div class="letter-group">
+                    <div class="letters-wrap">
+                        <div class="letter-box" data-index="30">त</div><div class="letter-box" data-index="31">थ</div>
+                        <div class="letter-box" data-index="32">द</div><div class="letter-box" data-index="33">ध</div>
+                        <div class="letter-box" data-index="34">न</div>
+                    </div>
+                    <div class="group-label">dental (dantya)</div>
+                </div>
+                <div class="letter-group">
+                    <div class="letters-wrap">
+                        <div class="letter-box" data-index="35">प</div><div class="letter-box" data-index="36">फ</div>
+                        <div class="letter-box" data-index="37">ब</div><div class="letter-box" data-index="38">भ</div>
+                        <div class="letter-box" data-index="39">म</div>
+                    </div>
+                    <div class="group-label">labial (oṣṭhya)</div>
+                </div>
+            </div>
+            <div id="sparsha">sparsha</div>
         </div>
 
-        <div class="alphabet-row dental-labial">
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="30">त</div><div class="letter-box" data-index="31">थ</div>
-                    <div class="letter-box" data-index="32">द</div><div class="letter-box" data-index="33">ध</div>
-                    <div class="letter-box" data-index="34">न</div>
-                </div>
-                <div class="group-label">dental (dantya)</div>
-            </div>
-            <div class="letter-group">
-                <div class="letters-wrap">
-                    <div class="letter-box" data-index="35">प</div><div class="letter-box" data-index="36">फ</div>
-                    <div class="letter-box" data-index="37">ब</div><div class="letter-box" data-index="38">भ</div>
-                    <div class="letter-box" data-index="39">म</div>
-                </div>
-                <div class="group-label">labial (oṣṭhya)</div>
-            </div>
-        </div>
-        <div id="sparsha">sparsha</div>
-	</div>
         <div class="alphabet-row last-row">
             <div class="letter-group">
                 <div class="letters-wrap">
@@ -175,11 +177,13 @@
             </div>
         </div>
     </div>
+
     <footer id="app-footer">
-        &copy; 2026 Maharishi International University. All rights reserved.<br> 
+        &copy; 2026 Maharishi International University. All rights reserved.<br>
         Reproduction or distribution of any part of this page is strictly prohibited.<br>
-		Visit: <a href="https://www.miu.edu" target="_blank" rel="noopener noreferrer">https://www.miu.edu</a>
+        Visit: <a href="https://www.miu.edu" target="_blank" rel="noopener noreferrer">https://www.miu.edu</a>
     </footer>
+
 </div>
 
 <script src="logic.js"></script>
